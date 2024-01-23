@@ -61,6 +61,7 @@ class GameViewModel: ViewModel() {
                 userNumberInt > currentState.mysteriousNumber -> {
                     "Hint \n You are Guessing Bigger Number then The Mysterious Number"
                 }
+
                 userNumberInt < currentState.mysteriousNumber -> {
                     "Hint \n You are Guessing Smaller Number then The Mysterious Number"
                 }

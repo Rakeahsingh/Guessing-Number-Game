@@ -19,6 +19,7 @@ fun GameScreen(
     onEvent: (GameEvent) -> Unit
 ) {
 
+
     val context = LocalContext.current
 
     when(state.gameStates){
@@ -26,13 +27,14 @@ fun GameScreen(
             GameScreenComponent(
                 state = state,
                 onSubmitButtonClick = { onEvent(GameEvent.SubmitButtonClick(state.userNo, context = context)) },
-                onValueChange = { onEvent(GameEvent.UpdateUserNo(state.userNo)) }
+                onEvent = onEvent
             )
         }
 
         GameStates.WON -> {
             Column(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
                     .background(BlueDark)
             ) {
                 WinOrLoseDialog(
@@ -48,7 +50,8 @@ fun GameScreen(
 
         GameStates.LOOSE -> {
             Column(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
                     .background(BlueDark)
             ){
                 WinOrLoseDialog(

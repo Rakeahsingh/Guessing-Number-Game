@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -37,6 +38,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.guessingnumbergame.gameScreen.GameEvent
 import com.example.guessingnumbergame.gameScreen.GameState
 import com.example.guessingnumbergame.ui.theme.BlueDark
 import com.example.guessingnumbergame.ui.theme.YellowDark
@@ -45,9 +47,11 @@ import kotlinx.coroutines.delay
 @Composable
 fun GameScreenComponent(
     state: GameState,
-    onSubmitButtonClick: () -> Unit,
-    onValueChange: () -> Unit
+    onEvent: (GameEvent) -> Unit,
+    onSubmitButtonClick: () -> Unit
 ) {
+
+    val context = LocalContext.current
 
     val focusRequester = remember {
         FocusRequester()
@@ -62,18 +66,18 @@ fun GameScreenComponent(
         modifier = Modifier
             .fillMaxSize()
             .background(BlueDark)
-            .padding(8.dp),
-        verticalArrangement = Arrangement.SpaceAround
+            .padding(8.dp)
     ) {
 
         Text(
             text = "Number Guessing Game",
-            fontSize = 40.sp,
+            fontSize = 35.sp,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             fontFamily = FontFamily.Cursive,
             color = Color.White,
             modifier = Modifier.fillMaxWidth()
+                .padding(vertical = 10.dp)
         )
 
         Text(
@@ -89,13 +93,15 @@ fun GameScreenComponent(
             },
             color = YellowDark,
             fontWeight = FontWeight.Bold,
-            fontSize = 20.sp
+            fontSize = 20.sp,
+            modifier = Modifier.fillMaxWidth()
+                .padding(vertical = 10.dp)
         )
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(250.dp)
+                .height(200.dp)
                 .padding(8.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
@@ -116,11 +122,12 @@ fun GameScreenComponent(
         Text(
             text = state.hintDisplaying,
             color = Color.White,
-            fontSize = 22.sp,
+            fontSize = 20.sp,
             fontStyle = FontStyle.Italic,
             lineHeight = 30.sp,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth()
+                .padding(top = 10.dp)
         )
 
         Spacer(modifier = Modifier.height(10.dp))
@@ -128,7 +135,7 @@ fun GameScreenComponent(
         OutlinedTextField(
             value = state.userNo,
             onValueChange = {
-                onValueChange()
+                onEvent(GameEvent.UpdateUserNo(it))
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -146,7 +153,9 @@ fun GameScreenComponent(
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = {  }
+                onDone = {
+                    onEvent(GameEvent.SubmitButtonClick(state.userNo, context = context))
+                }
             ),
             textStyle = TextStyle(
                 textAlign = TextAlign.Center,
