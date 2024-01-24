@@ -76,7 +76,8 @@ fun GameScreenComponent(
             textAlign = TextAlign.Center,
             fontFamily = FontFamily.Cursive,
             color = Color.White,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(vertical = 10.dp)
         )
 
@@ -94,7 +95,8 @@ fun GameScreenComponent(
             color = YellowDark,
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(vertical = 10.dp)
         )
 
@@ -126,11 +128,12 @@ fun GameScreenComponent(
             fontStyle = FontStyle.Italic,
             lineHeight = 30.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(top = 10.dp)
         )
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         OutlinedTextField(
             value = state.userNo,
@@ -159,11 +162,13 @@ fun GameScreenComponent(
             ),
             textStyle = TextStyle(
                 textAlign = TextAlign.Center,
-                fontSize = 38.sp,
-                color = YellowDark
+                fontSize = 30.sp,
+                color = Color.Black
             ),
             shape = RoundedCornerShape(12.dp)
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = {
@@ -175,7 +180,7 @@ fun GameScreenComponent(
             modifier = Modifier
                 .bounceClick()
                 .align(Alignment.End)
-                .padding(end = 50.dp, bottom = 200.dp)
+                .padding(end = 50.dp)
         ) {
             Text(
                 text = "Submit",

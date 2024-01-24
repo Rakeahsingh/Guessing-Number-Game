@@ -44,7 +44,7 @@ class GameViewModel: ViewModel() {
 
             if (userNumberInt !in 1..99){
                 Toast.makeText(context, "Please Enter A Valid Number", Toast.LENGTH_SHORT).show()
-
+                return@launch
             }
 
             val currentState = _state.value

@@ -24,11 +24,18 @@ fun GameScreen(
 
     when(state.gameStates){
         GameStates.PLAYING -> {
-            GameScreenComponent(
-                state = state,
-                onSubmitButtonClick = { onEvent(GameEvent.SubmitButtonClick(state.userNo, context = context)) },
-                onEvent = onEvent
-            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(BlueDark)
+            ){
+                GameScreenComponent(
+                    state = state,
+                    onSubmitButtonClick = { onEvent(GameEvent.SubmitButtonClick(state.userNo, context = context)) },
+                    onEvent = onEvent
+                )
+            }
+
         }
 
         GameStates.WON -> {
