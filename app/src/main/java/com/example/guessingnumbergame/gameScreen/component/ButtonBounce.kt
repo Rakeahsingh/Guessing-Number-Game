@@ -24,12 +24,14 @@ fun Modifier.bounceClick(onClick: () -> Unit = {}) = composed {
             scaleX = scale
             scaleY = scale
         }
+
         .clickable(
             interactionSource = remember { MutableInteractionSource() },
             indication = null,
             onClick = {
                 onClick()
             }
+
         )
         .pointerInput(buttonState) {
             awaitPointerEventScope {
@@ -40,6 +42,7 @@ fun Modifier.bounceClick(onClick: () -> Unit = {}) = composed {
                     awaitFirstDown(false)
                     ButtonState.Pressed
                 }
+
             }
         }
 }
