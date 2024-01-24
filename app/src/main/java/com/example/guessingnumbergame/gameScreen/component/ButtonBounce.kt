@@ -40,6 +40,7 @@ fun Modifier.bounceClick(onClick: () -> Unit = {}) = composed {
                     awaitFirstDown(false)
                     ButtonState.Pressed
                 }
+
             }
         }
 }
