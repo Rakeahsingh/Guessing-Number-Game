@@ -23,6 +23,7 @@ fun Modifier.bounceClick(onClick: () -> Unit = {}) = composed {
         .graphicsLayer {
             scaleX = scale
             scaleY = scale
+
         }
         .clickable(
             interactionSource = remember { MutableInteractionSource() },
